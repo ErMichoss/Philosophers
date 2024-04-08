@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     ft_checkargs(argc, argv);
     ft_check_must_eat(argc, &rules);
     ft_set_parameters(argv, &rules); // it set the parameters of the rules struct
-    ft_init(&rules); // it set the parameters of the philo struct;
+    ft_init(&rules); // it set the parameters of the philo struct (maybe also starts the philo rutine?? )
 
     return (0);
 }

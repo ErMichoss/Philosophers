@@ -67,6 +67,8 @@ void    ft_check_must_eat(int argc, t_rules *rules);
 int     ft_isnum(char *str);
 int     ft_atoi(char *str);
 void    ft_set_parameters(char **argv, t_rules *rules;
+void	philo_rutine(void *phi);
+void 	ft_init(t_rules *rules);
 
 
 #endif
