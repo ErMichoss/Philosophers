@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../incl/philo.h"
-#include "philo.h"
 
 void    ft_set_parameters(char **argv, t_rules *rules)
 {
@@ -23,6 +22,9 @@ void    ft_set_parameters(char **argv, t_rules *rules)
     rules->t_sleep = ft_atoi(argv[4]);
     if (rules->must_eat == 1)
         rules->n_meals = ft_atoi(argv[5]);
+    rules->philo = malloc(sizeof(t_philo) * rules->n_philo);
+    if (rules->philo == NULL)
+        ft_error_msg("Error trying to set the philo array\n");
 }
 
 int ft_atoi(char *str)

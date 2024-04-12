@@ -13,21 +13,19 @@
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <string.h>
-# include <stdio.h>
 # include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <sys/time.h>
+# include <limits.h>
 
 typedef struct s_philo
 {
     int				id; // the id of the philo
 	int				meal_count; // the number of meals it has had
-	bool			is_eating; // a flag to know if the philo is eating
+	int				is_eating; // a flag to know if the philo is eating
 	pthread_t		thread; // the thread (this is the philosopher)
 	long int		last_meal; // the last meal the philo had
 	struct s_rules	*rules; // a pointer to ther rules struct
@@ -49,7 +47,7 @@ typedef struct s_rules
 	pthread_mutex_t mutex_eat; // mutex declared for eating
 	pthread_mutex_t mutex_dead; // mutex declared for checking death
 	pthread_mutex_t mutex_print; // mutex declared for printing
-}   t_rules
+}   t_rules;
 
 
 
@@ -66,8 +64,8 @@ void    ft_checkargs(int argc, char **argv);
 void    ft_check_must_eat(int argc, t_rules *rules);
 int     ft_isnum(char *str);
 int     ft_atoi(char *str);
-void    ft_set_parameters(char **argv, t_rules *rules;
-void	philo_rutine(void *phi);
+void    ft_set_parameters(char **argv, t_rules *rules);
+void	*philo_rutine(void *phi);
 void 	ft_init(t_rules *rules);
 
 

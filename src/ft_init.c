@@ -14,7 +14,7 @@
 /*Esto inicializa filosofos con cubiertos*/
 void ft_init(t_rules *rules)
 {
-    int i:
+    int i;
 
     i = -1;
     while(++i < rules->n_philo)

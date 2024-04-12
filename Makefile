@@ -24,6 +24,8 @@ SRCS = src/main.c \
 		src/error.c \
 		src/ft_isnum.c \
 		src/set_parameters.c \
+		src/philo.c \
+		src/ft_init.c 
 
 OBJS = $(SRCS:.c=.o)
 
