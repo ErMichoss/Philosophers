@@ -16,6 +16,7 @@ void ft_init(t_rules *rules)
 {
     int i;
 
+    rules->t_start = timestamp();
     i = -1;
     while(++i < rules->n_philo)
     {

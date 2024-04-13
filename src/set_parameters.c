@@ -14,6 +14,10 @@
 
 void    ft_set_parameters(char **argv, t_rules *rules)
 {
+    pthread_mutex_init(&data->mutex_print, NULL);
+    pthread_mutex_init(&data->mutex_eat, NULL);
+    pthread_mutex_init(&data->mutex_dead, NULL);
+    pthread_mutex_init(&data->stop_philo, NULL);
     rules->n_philo = ft_atoi(argv[1]);
     if (rules->n_philo < 1)
         ft_error_msg("Number of philosphers not valid\n");

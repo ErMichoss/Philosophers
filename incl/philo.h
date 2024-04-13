@@ -42,6 +42,7 @@ typedef struct s_rules
 	int				t_sleep; // sleep time
 	int				n_meals; // numbre of meals
 	int				stop_flag; // a flag to stop
+	long int		time_start;
 	t_philo			*philo; // array of philo's struct
 	pthread_mutex_t stop_philo; // mutex declared to stop the philo's ruting
 	pthread_mutex_t mutex_eat; // mutex declared for eating
@@ -67,6 +68,10 @@ int     ft_atoi(char *str);
 void    ft_set_parameters(char **argv, t_rules *rules);
 void	*philo_rutine(void *phi);
 void 	ft_init(t_rules *rules);
+int	is_dead(t_philo *philo, int nb);
+long long	timestamp(void);
+void	ft_usleep(int ms);
+void	print(t_philo *philo, char *str);
 
 
 #endif
