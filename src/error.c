@@ -12,7 +12,7 @@
 
 #include "../incl/philo.h"
 
-void    ft_error_msg(char *str) // a function to exit the program in case of an error
+void    ft_error_msg(char *str)
 {
     int i;
 

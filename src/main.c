@@ -12,6 +12,23 @@
 
 #include "../incl/philo.h"
 
+void	free_program(t_rules *rules)
+{
+	int	i;
+
+	i = -1;
+	while (++i < rules->n_philo)
+	{
+		pthread_mutex_destroy(&rules->philo[i].fork_l);
+		pthread_mutex_destroy(rules->philo[i].fork_r);
+	}
+	free(rules->philo);
+	pthread_mutex_destroy(&rules->mutex_print);
+	pthread_mutex_destroy(&rules->stop_philo);
+	pthread_mutex_destroy(&rules->mutex_eat);
+	pthread_mutex_destroy(&rules->mutex_dead);
+}
+
 void    ft_check_must_eat(int argc, t_rules *rules)
 {
     if (argc == 5)
@@ -43,8 +60,8 @@ int main(int argc, char *argv[])
 
     ft_checkargs(argc, argv);
     ft_check_must_eat(argc, &rules);
-    ft_set_parameters(argv, &rules); // it set the parameters of the rules struct
-    ft_init(&rules); // it set the parameters of the philo struct (maybe also starts the philo rutine?? )
-
+    ft_set_parameters(argv, &rules);
+    ft_init(&rules);
+    free_program(&rules);
     return (0);
 }

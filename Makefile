@@ -14,7 +14,7 @@ NAME = philo
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=thread
 
 RM = rm -f
 
@@ -25,7 +25,8 @@ SRCS = src/main.c \
 		src/ft_isnum.c \
 		src/set_parameters.c \
 		src/philo.c \
-		src/ft_init.c 
+		src/ft_init.c \
+		src/philo_utils.c
 
 OBJS = $(SRCS:.c=.o)
 

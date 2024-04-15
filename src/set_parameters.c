@@ -14,10 +14,10 @@
 
 void    ft_set_parameters(char **argv, t_rules *rules)
 {
-    pthread_mutex_init(&data->mutex_print, NULL);
-    pthread_mutex_init(&data->mutex_eat, NULL);
-    pthread_mutex_init(&data->mutex_dead, NULL);
-    pthread_mutex_init(&data->stop_philo, NULL);
+    pthread_mutex_init(&rules->mutex_print, NULL);
+    pthread_mutex_init(&rules->mutex_eat, NULL);
+    pthread_mutex_init(&rules->mutex_dead, NULL);
+    pthread_mutex_init(&rules->stop_philo, NULL);
     rules->n_philo = ft_atoi(argv[1]);
     if (rules->n_philo < 1)
         ft_error_msg("Number of philosphers not valid\n");
@@ -25,7 +25,11 @@ void    ft_set_parameters(char **argv, t_rules *rules)
     rules->t_eat = ft_atoi(argv[3]);
     rules->t_sleep = ft_atoi(argv[4]);
     if (rules->must_eat == 1)
+    {
         rules->n_meals = ft_atoi(argv[5]);
+        if(rules->n_meals < 1)
+            ft_error_msg("You must input a valid number of meals\n");
+    }
     rules->philo = malloc(sizeof(t_philo) * rules->n_philo);
     if (rules->philo == NULL)
         ft_error_msg("Error trying to set the philo array\n");

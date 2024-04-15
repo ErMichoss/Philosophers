@@ -21,19 +21,21 @@
 # include <sys/time.h>
 # include <limits.h>
 
+typedef struct l_rules t_rules;
+
 typedef struct s_philo
 {
     int				id; // the id of the philo
 	int				meal_count; // the number of meals it has had
-	int				is_eating; // a flag to know if the philo is eating
+	bool			is_eating; // a flag to know if the philo is eating
 	pthread_t		thread; // the thread (this is the philosopher)
 	long int		last_meal; // the last meal the philo had
-	struct s_rules	*rules; // a pointer to ther rules struct
+	struct l_rules	*rules; // a pointer to ther rules struct
 	pthread_mutex_t *fork_r; // a pointer to the fork of the philospher to the right
 	pthread_mutex_t fork_l; // left fork
 }       t_philo;
 
-typedef struct s_rules
+struct l_rules
 {
     int				must_eat; // a flag to know if the program must stop at a number of meals
 	int				n_philo; // number of philos
@@ -48,7 +50,7 @@ typedef struct s_rules
 	pthread_mutex_t mutex_eat; // mutex declared for eating
 	pthread_mutex_t mutex_dead; // mutex declared for checking death
 	pthread_mutex_t mutex_print; // mutex declared for printing
-}   t_rules;
+};
 
 
 
@@ -61,17 +63,21 @@ void    ft_error_msg(char *str);
 
 //*** FUNCT ***
 
-void    ft_checkargs(int argc, char **argv);
-void    ft_check_must_eat(int argc, t_rules *rules);
-int     ft_isnum(char *str);
-int     ft_atoi(char *str);
-void    ft_set_parameters(char **argv, t_rules *rules);
-void	*philo_rutine(void *phi);
-void 	ft_init(t_rules *rules);
-int	is_dead(t_philo *philo, int nb);
-long long	timestamp(void);
-void	ft_usleep(int ms);
-void	print(t_philo *philo, char *str);
+void    	ft_checkargs(int argc, char **argv);
+void    	ft_check_must_eat(int argc, t_rules *rules);
+int     	ft_isnum(char *str);
+int     	ft_atoi(char *str);
+void    	ft_set_parameters(char **argv, t_rules *rules);
+void		*philo_rutine(void *p);
+void 		ft_init(t_rules *rules);
+int			is_dead(t_philo *philo, int nb);
+long long	get_time(void);
+void		ft_usleep(int ms);
+void		print(t_philo *philo, char *str);
+void    	philo_eat(t_philo *philo);
+void    	take_fork(t_philo *philo);
 
+//*** FREE ***
+void	free_program(t_rules *rules);
 
 #endif

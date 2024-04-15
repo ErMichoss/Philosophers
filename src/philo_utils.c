@@ -14,32 +14,32 @@
 
 int	is_dead(t_philo *philo, int nb)
 {
-	pthread_mutex_lock(philo->rules->mutex_dead);
+	pthread_mutex_lock(&(philo->rules->mutex_dead));
 	if (nb)
-		philo->rules->stop = 1;
-	if (philo->rules->stop)
+		philo->rules->stop_flag = 1;
+	if (philo->rules->stop_flag)
 	{
-		pthread_mutex_unlock(&philo->rules->mutex_dead);
+		pthread_mutex_unlock(&(philo->rules->mutex_dead));
 		return (1);
 	}
-	pthread_mutex_unlock(&philo->rules->mumtex_dead);
+	pthread_mutex_unlock(&(philo->rules->mutex_dead));
 	return (0);
 }
 
-long long	timestamp(void)
+long long	get_time(void)
 {
 	struct timeval	timeval;
 
 	gettimeofday(&timeval, NULL);
-	return (timeval.tv_sec * 1000 + timeval.tv_usec / 1000);
+	return (timeval.tv_sec * 1e3 + timeval.tv_usec / 1e3);
 }
 
 void	ft_usleep(int ms)
 {
 	long int	time;
 
-	time = timestamp();
-	while (timestamp() - time < ms)
+	time = get_time();
+	while (get_time() - time < ms)
 		usleep(ms / 10);
 }
 
@@ -48,8 +48,9 @@ void	print(t_philo *philo, char *str)
 	long int	time;
 
 	pthread_mutex_lock(&(philo->rules->mutex_print));
-	time = timestamp() - philo->rules->time_start;
-	if (!philo->rules->stop_flag && time == 0 && time <= 2147483647 && !is_dead(philo, 0))
-		printf("%lld %d %s", timestamp() - philo->rules->time_start, philo->id, str);
+	time = get_time() - philo->rules->time_start;
+	write(1, "2\n", 2);
+	if (!philo->rules->stop_flag && time == 0 && time <= INT_MAX && is_dead(philo, 0))
+		printf("%lld %d %s", get_time() - philo->rules->time_start, philo->id, str);
 	pthread_mutex_unlock(&(philo->rules->mutex_print));
 }
