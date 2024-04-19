@@ -49,7 +49,7 @@ struct l_rules
 	pthread_mutex_t stop_philo; // mutex declared to stop the philo's ruting
 	pthread_mutex_t mutex_eat; // mutex declared for eating
 	pthread_mutex_t mutex_dead; // mutex declared for checking death
-	pthread_mutex_t mutex_print; // mutex declared for printing
+	pthread_mutex_t mutex_ft_print; // mutex declared for ft_printing
 };
 
 
@@ -71,9 +71,9 @@ void    	ft_set_parameters(char **argv, t_rules *rules);
 void		*philo_rutine(void *p);
 void 		ft_init(t_rules *rules);
 int			is_dead(t_philo *philo, int nb);
-long long	get_time(void);
+long		get_time(void);
 void		ft_usleep(int ms);
-void		print(t_philo *philo, char *str);
+void		ft_print(t_philo *philo, char *str);
 void    	philo_eat(t_philo *philo);
 void    	take_fork(t_philo *philo);
 

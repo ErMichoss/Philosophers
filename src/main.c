@@ -23,7 +23,7 @@ void	free_program(t_rules *rules)
 		pthread_mutex_destroy(rules->philo[i].fork_r);
 	}
 	free(rules->philo);
-	pthread_mutex_destroy(&rules->mutex_print);
+	pthread_mutex_destroy(&rules->mutex_ft_print);
 	pthread_mutex_destroy(&rules->stop_philo);
 	pthread_mutex_destroy(&rules->mutex_eat);
 	pthread_mutex_destroy(&rules->mutex_dead);
@@ -31,10 +31,10 @@ void	free_program(t_rules *rules)
 
 void    ft_check_must_eat(int argc, t_rules *rules)
 {
-    if (argc == 5)
-        rules->must_eat = 0;
-    else
+    if (argc == 6)
         rules->must_eat = 1;
+    else
+        rules->must_eat = 0;
 }
 
 void    ft_checkargs(int argc, char **argv)

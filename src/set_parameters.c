@@ -14,7 +14,7 @@
 
 void    ft_set_parameters(char **argv, t_rules *rules)
 {
-    pthread_mutex_init(&rules->mutex_print, NULL);
+    pthread_mutex_init(&rules->mutex_ft_print, NULL);
     pthread_mutex_init(&rules->mutex_eat, NULL);
     pthread_mutex_init(&rules->mutex_dead, NULL);
     pthread_mutex_init(&rules->stop_philo, NULL);
@@ -30,6 +30,7 @@ void    ft_set_parameters(char **argv, t_rules *rules)
         if(rules->n_meals < 1)
             ft_error_msg("You must input a valid number of meals\n");
     }
+    rules->stop_flag = 0;
     rules->philo = malloc(sizeof(t_philo) * rules->n_philo);
     if (rules->philo == NULL)
         ft_error_msg("Error trying to set the philo array\n");
