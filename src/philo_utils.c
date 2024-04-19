@@ -16,24 +16,15 @@ int	is_dead(t_philo *philo, int nb)
 {
 	pthread_mutex_lock(&(philo->rules->mutex_dead));
 	if (nb == 1)
-	{
-		pthread_mutex_lock(&(philo->rules->stop_philo));
 		philo->rules->stop_flag = 1;
-		pthread_mutex_unlock(&(philo->rules->stop_philo));
-	}
-	pthread_mutex_lock(&(philo->rules->stop_philo));
+	printf("%d\n", philo->rules->stop_flag);
 	if (philo->rules->stop_flag == 1)
 	{
-		pthread_mutex_unlock(&(philo->rules->stop_philo));
 		pthread_mutex_unlock(&(philo->rules->mutex_dead));
 		return (1);
 	}
-	else
-	{
-		pthread_mutex_unlock(&(philo->rules->stop_philo));
-		pthread_mutex_unlock(&(philo->rules->mutex_dead));
-		return (0);
-	}
+	pthread_mutex_unlock(&(philo->rules->mutex_dead));
+	return (0);
 }
 
 long	get_time(void)

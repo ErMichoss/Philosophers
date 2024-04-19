@@ -73,9 +73,9 @@ void    *philo_rutine(void *p)
         if (philo->rules->n_philo != 1)
             philo_eat(philo);
         pthread_detach(thread);
-        pthread_mutex_lock(&(philo->rules->stop_philo));
         if (philo->rules->must_eat == 1)
 		{
+            pthread_mutex_lock(&(philo->rules->stop_philo));
             if (philo->meal_count == philo->rules->n_meals)
             {
                 pthread_mutex_unlock(&(philo->rules->stop_philo));
@@ -83,6 +83,8 @@ void    *philo_rutine(void *p)
             }
 			pthread_mutex_unlock(&(philo->rules->stop_philo));
 		}
+        pthread_mutex_lock(&(philo->rules->stop_philo));
+        pthread_mutex_unlock(&(philo->rules->stop_philo));
     }
     return NULL;
 }

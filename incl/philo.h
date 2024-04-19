@@ -50,6 +50,7 @@ struct l_rules
 	pthread_mutex_t mutex_eat; // mutex declared for eating
 	pthread_mutex_t mutex_dead; // mutex declared for checking death
 	pthread_mutex_t mutex_ft_print; // mutex declared for ft_printing
+	pthread_mutex_t mutex_dead_aux;
 };
 
 

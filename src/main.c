@@ -31,10 +31,10 @@ void	free_program(t_rules *rules)
 
 void    ft_check_must_eat(int argc, t_rules *rules)
 {
-    if (argc == 6)
-        rules->must_eat = 1;
-    else
+    if (argc == 5)
         rules->must_eat = 0;
+    else
+        rules->must_eat = 1;
 }
 
 void    ft_checkargs(int argc, char **argv)

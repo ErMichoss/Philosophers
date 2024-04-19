@@ -17,6 +17,7 @@ void    ft_set_parameters(char **argv, t_rules *rules)
     pthread_mutex_init(&rules->mutex_ft_print, NULL);
     pthread_mutex_init(&rules->mutex_eat, NULL);
     pthread_mutex_init(&rules->mutex_dead, NULL);
+    pthread_mutex_init(&rules->mutex_dead_aux, NULL);
     pthread_mutex_init(&rules->stop_philo, NULL);
     rules->n_philo = ft_atoi(argv[1]);
     if (rules->n_philo < 1)

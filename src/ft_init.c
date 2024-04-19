@@ -20,7 +20,6 @@ void    ft_init(t_rules *rules)
     i = -1;
     while(++i < rules->n_philo)
     {
-        //write(1, "Entra en bucle init\n", 20);
         rules->philo[i].id = i + 1; 
         rules->philo[i].last_meal = 0; 
         rules->philo[i].fork_r = NULL; 
@@ -32,14 +31,12 @@ void    ft_init(t_rules *rules)
         else
         { 
             rules->philo[i].fork_r = &rules->philo[0].fork_l;
-            //write(1, "Coge el ultimo tenedor\n", 23);
         }
         pthread_create(&rules->philo[i].thread, NULL, &philo_rutine, &(rules->philo[i]));
     }
     i = -1;
 	while (++i < rules->n_philo)
     {
-        //write(1, "Espera a que terminen los threads\n", 34);
 		pthread_join(rules->philo[i].thread, NULL);
     }
 }
