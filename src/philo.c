@@ -15,15 +15,22 @@
 void    *check_dead(void *p)
 {
     t_philo *philo;
-
+    long int time;
+    long int death;
+    
     philo = (t_philo *)p;
     ft_usleep(philo->rules->t_die + 1);
     pthread_mutex_lock(&(philo->rules->mutex_eat));
     pthread_mutex_lock(&(philo->rules->stop_philo));
-    if (is_dead(philo, 0) == 0 && get_time() - philo->last_meal >= (long)(philo->rules->t_die))
+    time = get_time() - philo->last_meal;
+    death = (long)(philo->rules->t_die);
+    if (is_dead(philo, 0) == 0)
     {
-        ft_print(philo, " died\n");
-        is_dead(philo, 1);
+        if (time >= death)
+        {
+            ft_print(philo, " died\n");
+            is_dead(philo, 1);
+        }
     }
     pthread_mutex_unlock(&(philo->rules->mutex_eat));
     pthread_mutex_unlock(&(philo->rules->stop_philo));
@@ -73,7 +80,7 @@ void    *philo_rutine(void *p)
         if (philo->rules->n_philo != 1)
             philo_eat(philo);
         pthread_detach(thread);
-        if (philo->rules->must_eat == 1)
+        if (philo->rules->must_eat == 1 && is_dead(philo, 0) == 0)
 		{
             pthread_mutex_lock(&(philo->rules->stop_philo));
             if (philo->meal_count == philo->rules->n_meals)
@@ -83,8 +90,7 @@ void    *philo_rutine(void *p)
             }
 			pthread_mutex_unlock(&(philo->rules->stop_philo));
 		}
-        pthread_mutex_lock(&(philo->rules->stop_philo));
-        pthread_mutex_unlock(&(philo->rules->stop_philo));
+        ft_usleep(1);
     }
     return NULL;
 }

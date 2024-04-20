@@ -25,31 +25,31 @@ typedef struct l_rules t_rules;
 
 typedef struct s_philo
 {
-    int				id; // the id of the philo
-	int				meal_count; // the number of meals it has had
-	bool			is_eating; // a flag to know if the philo is eating
-	pthread_t		thread; // the thread (this is the philosopher)
-	long int		last_meal; // the last meal the philo had
-	struct l_rules	*rules; // a pointer to ther rules struct
-	pthread_mutex_t *fork_r; // a pointer to the fork of the philospher to the right
-	pthread_mutex_t fork_l; // left fork
+    int				id;
+	int				meal_count;
+	bool			is_eating;
+	pthread_t		thread;
+	long int		last_meal;
+	struct l_rules	*rules;
+	pthread_mutex_t *fork_r;
+	pthread_mutex_t fork_l;
 }       t_philo;
 
 struct l_rules
 {
-    int				must_eat; // a flag to know if the program must stop at a number of meals
-	int				n_philo; // number of philos
-	int				t_die; // death time
-	int				t_eat; // eat time
-	int				t_sleep; // sleep time
-	int				n_meals; // numbre of meals
-	int				stop_flag; // a flag to stop
+    int				must_eat;
+	int				n_philo;
+	int				t_die;
+	int				t_eat;
+	int				t_sleep;
+	int				n_meals;
+	int				stop_flag;
 	long int		time_start;
-	t_philo			*philo; // array of philo's struct
-	pthread_mutex_t stop_philo; // mutex declared to stop the philo's ruting
-	pthread_mutex_t mutex_eat; // mutex declared for eating
-	pthread_mutex_t mutex_dead; // mutex declared for checking death
-	pthread_mutex_t mutex_ft_print; // mutex declared for ft_printing
+	t_philo			*philo;
+	pthread_mutex_t stop_philo;
+	pthread_mutex_t mutex_eat;
+	pthread_mutex_t mutex_dead;
+	pthread_mutex_t mutex_ft_print;
 	pthread_mutex_t mutex_dead_aux;
 };
 

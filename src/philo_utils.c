@@ -14,11 +14,16 @@
 
 int	is_dead(t_philo *philo, int nb)
 {
+	int stop;
 	pthread_mutex_lock(&(philo->rules->mutex_dead));
 	if (nb == 1)
+	{
+		pthread_mutex_lock(&(philo->rules->mutex_dead_aux));
 		philo->rules->stop_flag = 1;
-	printf("%d\n", philo->rules->stop_flag);
-	if (philo->rules->stop_flag == 1)
+		pthread_mutex_unlock(&(philo->rules->mutex_dead_aux));
+	}
+	stop = philo->rules->stop_flag;
+	if (stop == 1)
 	{
 		pthread_mutex_unlock(&(philo->rules->mutex_dead));
 		return (1);
@@ -50,7 +55,7 @@ void	ft_print(t_philo *philo, char *str)
 
 	pthread_mutex_lock(&(philo->rules->mutex_ft_print));
 	time = get_time() - philo->rules->time_start;
-	if (philo->rules->stop_flag == 0 && is_dead(philo, 0) == 0)
+	if (is_dead(philo, 0) == 0)
 	{
 		printf("\033[0;92m");
 		printf("%-6ld ", get_time() - philo->rules->time_start);
