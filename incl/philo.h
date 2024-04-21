@@ -21,23 +21,23 @@
 # include <sys/time.h>
 # include <limits.h>
 
-typedef struct l_rules t_rules;
+typedef struct s_rules	t_rules;
 
 typedef struct s_philo
 {
-    int				id;
+	int				id;
 	int				meal_count;
 	bool			is_eating;
 	pthread_t		thread;
 	long int		last_meal;
-	struct l_rules	*rules;
-	pthread_mutex_t *fork_r;
-	pthread_mutex_t fork_l;
-}       t_philo;
+	struct s_rules	*rules;
+	pthread_mutex_t	*fork_r;
+	pthread_mutex_t	fork_l;
+}					t_philo;
 
-struct l_rules
+struct	s_rules
 {
-    int				must_eat;
+	int				must_eat;
 	int				n_philo;
 	int				t_die;
 	int				t_eat;
@@ -46,39 +46,36 @@ struct l_rules
 	int				stop_flag;
 	long int		time_start;
 	t_philo			*philo;
-	pthread_mutex_t stop_philo;
-	pthread_mutex_t mutex_eat;
-	pthread_mutex_t mutex_dead;
-	pthread_mutex_t mutex_ft_print;
-	pthread_mutex_t mutex_dead_aux;
+	pthread_mutex_t	stop_philo;
+	pthread_mutex_t	mutex_eat;
+	pthread_mutex_t	mutex_dead;
+	pthread_mutex_t	mutex_ft_print;
 };
 
-
-
 //*** MAIN ***
-int     main(int argc, char *argv[]);
+int					main(int argc, char *argv[]);
 
 //*** ERRORS ***
 
-void    ft_error_msg(char *str);
+void				ft_error_msg(char *str);
 
 //*** FUNCT ***
 
-void    	ft_checkargs(int argc, char **argv);
-void    	ft_check_must_eat(int argc, t_rules *rules);
-int     	ft_isnum(char *str);
-int     	ft_atoi(char *str);
-void    	ft_set_parameters(char **argv, t_rules *rules);
-void		*philo_rutine(void *p);
-void 		ft_init(t_rules *rules);
-int			is_dead(t_philo *philo, int nb);
-long		get_time(void);
-void		ft_usleep(int ms);
-void		ft_print(t_philo *philo, char *str);
-void    	philo_eat(t_philo *philo);
-void    	take_fork(t_philo *philo);
+void				ft_checkargs(int argc, char **argv);
+void				ft_check_must_eat(int argc, t_rules *rules);
+int					ft_isnum(char *str);
+int					ft_atoi(char *str);
+void				ft_set_parameters(char **argv, t_rules *rules);
+void				*philo_rutine(void *p);
+void				ft_init(t_rules *rules);
+int					is_dead(t_philo *philo, int nb);
+long				get_time(void);
+void				ft_usleep(int ms);
+void				ft_print(t_philo *philo, char *str);
+void				philo_eat(t_philo *philo);
+void				take_fork(t_philo *philo);
 
 //*** FREE ***
-void	free_program(t_rules *rules);
+void				free_program(t_rules *rules);
 
 #endif
