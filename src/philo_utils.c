@@ -10,20 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/philo.h"
+#include "philo.h"
 
 int	is_dead(t_philo *philo, int nb)
 {
-	int stop;
 	pthread_mutex_lock(&(philo->rules->mutex_dead));
 	if (nb == 1)
 	{
-		pthread_mutex_lock(&(philo->rules->mutex_dead_aux));
 		philo->rules->stop_flag = 1;
-		pthread_mutex_unlock(&(philo->rules->mutex_dead_aux));
 	}
-	stop = philo->rules->stop_flag;
-	if (stop == 1)
+	if (philo->rules->stop_flag == 1)
 	{
 		pthread_mutex_unlock(&(philo->rules->mutex_dead));
 		return (1);
@@ -60,7 +56,7 @@ void	ft_print(t_philo *philo, char *str)
 		printf("\033[0;92m");
 		printf("%-6ld ", get_time() - philo->rules->time_start);
 		printf("\033[0;93m");
-		printf("philo %d ", philo->id);
+		printf("%d ", philo->id);
 		printf("\033[0;96m");
 		printf("%s", str);
 		printf("\033[0;39m");

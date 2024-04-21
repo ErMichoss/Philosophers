@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/philo.h"
+#include "philo.h"
 
 void	free_program(t_rules *rules)
 {
@@ -29,39 +29,39 @@ void	free_program(t_rules *rules)
 	pthread_mutex_destroy(&rules->mutex_dead);
 }
 
-void    ft_check_must_eat(int argc, t_rules *rules)
+void	ft_check_must_eat(int argc, t_rules *rules)
 {
-    if (argc == 5)
-        rules->must_eat = 0;
-    else
-        rules->must_eat = 1;
+	if (argc == 5)
+		rules->must_eat = 0;
+	else
+		rules->must_eat = 1;
 }
 
-void    ft_checkargs(int argc, char **argv)
+void	ft_checkargs(int argc, char **argv)
 {
-    int i;
+	int	i;
 
-    if (argc == 1)
-        ft_error_msg("Invalid number of arguments");
-    else if (argc < 5 || argc > 6)
-        ft_error_msg("Invalid number of arguments");
-    i = 1;
-    while (argv[i] != NULL)
-    {
-        if (ft_isnum(argv[i]) == 1)
-            ft_error_msg("Invalid type of arguments");
-        i++;
-    }
+	if (argc == 1)
+		ft_error_msg("Invalid number of arguments");
+	else if (argc < 5 || argc > 6)
+		ft_error_msg("Invalid number of arguments");
+	i = 1;
+	while (argv[i] != NULL)
+	{
+		if (ft_isnum(argv[i]) == 1)
+			ft_error_msg("Invalid type of arguments");
+		i++;
+	}
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-    t_rules rules;
+	t_rules	rules;
 
-    ft_checkargs(argc, argv);
-    ft_check_must_eat(argc, &rules);
-    ft_set_parameters(argv, &rules);
-    ft_init(&rules);
-    free_program(&rules);
-    return (0);
+	ft_checkargs(argc, argv);
+	ft_check_must_eat(argc, &rules);
+	ft_set_parameters(argv, &rules);
+	ft_init(&rules);
+	free_program(&rules);
+	return (0);
 }
